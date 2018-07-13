@@ -22,8 +22,6 @@ sudo apt install ros-kinetic-opencv3
 
 sudo apt install python-matplotlib python-pyqt5 python-pip python-numpy python-pyqt5.qtsvg python-pyqt5.qsci python-yaml
 
-sudo apt 
-
 ```
 
 ## Running the example
