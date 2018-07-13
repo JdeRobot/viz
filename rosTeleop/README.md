@@ -1,6 +1,6 @@
 # Demo with Teleoperator
 
-![Example](https://github.com/JdeRobot/WebSim/blob/master/teleopDemo/demoTeleop.gif "Example with Camera and motors Entities")
+![Example](https://www.youtube.com/watch?v=6sGkY1PGuP8 "Example with Camera and motors Entities")
 
 ## Install packages 
 ```
@@ -46,6 +46,4 @@ cd WebSim/websim/
 npm install
 npm start
 ```
- The next video of youtube shows how it run
 
-https://www.youtube.com/watch?v=6sGkY1PGuP8
