@@ -1,6 +1,6 @@
 # Demo with Teleoperator
 
-![Example](https://www.youtube.com/watch?v=6sGkY1PGuP8 "Example with Camera and motors Entities")
+https://www.youtube.com/watch?v=6sGkY1PGuP8
 
 ## Install packages 
 ```
