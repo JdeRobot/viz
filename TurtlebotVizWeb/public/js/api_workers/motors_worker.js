@@ -28,29 +28,29 @@ function connect (config){
    //id.properties.setProperty("Ice.Trace.Network", "3");
    //id.properties.setProperty("Ice.Trace.Protocol", "1");
     communicator = Ice.initialize(id);
-   
+    console.log(config.epname);
     // Create the proxy to connect
     var proxy = communicator.stringToProxy(config.epname+":ws -h " + config.server.dir + " -p " + config.server.port);
 	// connects to the proxy and asks the image
     Promise = Prx.checkedCast(proxy).then(
        function(ar){
-		console.log("Notors connected: " + ar);
+		console.log("Motors connected: " + ar);
          srv = ar;
-          
+
          postMessage(true);
 	},
 	function(ex, ar){
-		console.log("Notors NOT connected: " + ex);
+		console.log("Motors NOT connected: " + ex);
        postMessage(false);
 	});
-      
+
 
 }
 
 
 function getW(){
       srv.getW().then(function (data){
-            W = data;   
+            W = data;
          response = {v:V,l:L,w:W};
          postMessage(response);
       },function(err){console.log(err);});
@@ -58,7 +58,7 @@ function getW(){
 
 function getV(){
    srv.getV().then(function (data){
-         V = data;   
+         V = data;
          response = {v:V,l:L,w:W};
          postMessage(response);
    },function(err){console.log(err);});
@@ -66,7 +66,7 @@ function getV(){
 
 function getL(){
    srv.getL().then(function (data){
-            L = data;   
+            L = data;
          response = {v:V,l:L,w:W};
          postMessage(response);
    },function(err){console.log(err);});
@@ -74,7 +74,7 @@ function getL(){
 
 function getAll(){
    console.log("getAll");
-   
+
 }
 
 function setV(data){
@@ -95,11 +95,11 @@ function setAll(data){
    if (data.w){
       setW(data.w);
    }
-   
+
    if (data.v){
       setV(data.v);
    }
-   
+
    if (data.l){
       setL(data.l);
    }
@@ -113,7 +113,7 @@ onmessage = function(e) {
     config.server = e.data.serv;
     config.epname = e.data.epname;
     var vel = e.data.data;
-   
+
     switch (e.data.func){
     case "getAll":
           getAll();

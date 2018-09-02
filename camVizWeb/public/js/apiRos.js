@@ -76,10 +76,11 @@ API.CameraRos = function (config){
         var size = $('#' + config.sizeid);
         var ctx = canvas.getContext("2d");
         var imagedata = new Image();
+	console.log("Subscribe Camera Info");
         self.rosdescrip.subscribe(function(message){
           size.html(message.width + "x" + message.height);
         })
-
+	console.log("Subscribe Camera");
         self.roscam.subscribe(function(message){
 	  console.log(message);
           if (message.format != null){

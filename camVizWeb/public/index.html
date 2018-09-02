@@ -12,6 +12,7 @@
 </head>
 <!--/head-->
 
+
 <body>
 <header id="header">
   <nav class="navbar navbar-inverse" role="banner">
@@ -68,10 +69,11 @@
         <h4 class="modal-title" id="configLabel">CameraView Config</h4>
       </div>
       <div id = "confignav" class="modal-body">
-        <div class="input-group">
-           <span class="input-group-addon" id="basic-addon1">Server</span>
-          <input  id="serv" type="text" class="form-control" placeholder="Server" value="Ice" aria-describedby="basic-addon1">
-        </div>
+        <form class="form-inline">
+           <button id="DfIce" type="button" class="btn btn-info">Ice</button>
+           <button id="DfRos" type="button" class="btn btn-info">Ros</button>
+           <input id="serv" type="hidden" value = "Ice">
+        </form>
         <br>
          <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">Addr</span>
