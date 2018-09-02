@@ -29,11 +29,15 @@ function CameraViewRos (config){
     * start
     * run client
     */
+
+  this.connect = function(){
+    if (camera == undefined){
+      camera = new API.CameraRos(this.conf);
+      camera.connect();
+    }
+  }
+
    this.start= function(){
-     if (camera == undefined){
-       camera = new API.CameraRos(this.conf);
-       camera.connect();
-     }
      camera.startStreaming();
    };
 
@@ -44,7 +48,6 @@ function CameraViewRos (config){
     */
    this.stop= function () {
      camera.stop();
-     camera.disconnect();
      camera = undefined;
    };
 
