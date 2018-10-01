@@ -40,7 +40,7 @@ class CameraWidget(QtWidgets.QWidget):
         self.imgLabel.show()
 
     def updateImage(self):
-
+	
         if (self.winParent.getCamera()):
             img = self.winParent.getCamera().getImage().data
             if img is not None:
