@@ -40,24 +40,23 @@ def depthToRGB8(float_img_buff):
 
 def imageComp2Image(img,bridge):
     '''
-    Translates from ROS CompressedImage to Image Raw. 
+    Translates from ROS CompressedImage to JderobotTypes Image. 
 
     @param img: ROS CompressedImage to translate
     @param bridge: bridge to do translation
 
     @type img: sensor_msgs.msg.CompressedImage
     @type brige: CvBridge
+
+    @return a JderobotTypes.Image translated from img
     '''
-    
-    np_arr = np.fromstring(img.data, np.uint8)
-    image_np = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
-    method = "GridFAST"
-    feat_det = cv2.ORB_create()
-    time1 = time.time()
-    featPoints = feat_det.detect(
-            cv2.cvtColor(image_np, cv2.COLOR_BGR2GRAY))
-    time2 = time.time()
-    return image_np
+
+    image = Image()
+    image.format = "RGB8"
+    image.data = bridge.compressed_imgmsg_to_cv2(img,"rgb8")
+    image.width = image.data.shape[0]
+    image.height = image.data.shape[1]
+    return image
 
 
 def imageMsg2Image(img, bridge):
@@ -78,7 +77,7 @@ def imageMsg2Image(img, bridge):
     image.width = img.width
     image.height = img.height
     image.format = "RGB8"
-    image.timeStamp = img.header.stamp.secs + (img.header.stamp.nsecs *1e-9)
+    #image.timeStamp = img.header.stamp.secs + (img.header.stamp.nsecs *1e-9)
     cv_image=0
     if (img.encoding == "32FC1"):
         gray_img_buff = bridge.imgmsg_to_cv2(img, "32FC1")
@@ -119,14 +118,17 @@ class ListenerCamera:
         @type img: sensor_msgs.msg.Image
 
         '''
-        if img.format == "jpeg":
-		image = imageComp2Image(img, self.bridge)
-		cv2.imshow('cv_img', image)
-	else:
-        	image = imageMsg2Image(img_comp, self.bridge)
+	try:
+        	if img.format == "jpeg":
+			image = imageComp2Image(img, self.bridge)
+			self.lock.acquire()
+			self.data = image
+			self.lock.release()
+	except:
+		image = imageMsg2Image(img, self.bridge)
 		self.lock.acquire()
-        	self.data = image
-        	self.lock.release()
+		self.data = image
+		self.lock.release()
 
         
     def stop(self):
