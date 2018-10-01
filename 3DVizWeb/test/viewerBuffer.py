@@ -55,28 +55,39 @@ class ViewerI(jderobot.Visualization):
                 name,form = obj_list[self.cont].split(".")
                 obj3D.obj = obj
                 print "Sending model by file: " + name + "." + form
+            pose3d = jderobot.Pose3DData()
+            pose3d.x = randrange(0,20)
+            pose3d.y = randrange(0,20)
+            pose3d.z = randrange(0,20)
+            pose3d.h = uniform(0,10)
+            pose3d.q0 = uniform(0,1)
+            pose3d.q1 = uniform(0,1-pose3d.q0)
+            pose3d.q2 = uniform(0,1-pose3d.q0-pose3d.q1)
+            pose3d.q3 = uniform(0,1-pose3d.q0-pose3d.q1-pose3d.q2)
             id_list.append(id)
             obj3D.id = id
             obj3D.format = form
+            obj3D.pos = pose3d
+            obj3D.scale = uniform(0,10)
             self.cont = self.cont + 1
             return obj3D
 
     def getPoseObj3DData(self, current=None):
-	   for i in id_list[:]:
-		   pose3d = jderobot.Pose3DData()
-		   pose3d.x = randrange(0,20)
-		   pose3d.y = randrange(0,20)
-		   pose3d.z = randrange(0,20)
-		   pose3d.h = randrange(-1,1)
-		   pose3d.q0 = uniform(-1,1)
-		   pose3d.q1 = uniform(-1,1)
-		   pose3d.q2 = uniform(-1,1)
-		   pose3d.q3 = uniform(-1,1)
-		   objpose3d = jderobot.PoseObj3D()
-		   objpose3d.id = id_list [id_list.index(i)]
-		   objpose3d.pos = pose3d
-		   bufferpose3D.append(objpose3d)
-           return bufferpose3D
+        for i in id_list[:]:
+            pose3d = jderobot.Pose3DData()
+            pose3d.x = randrange(0,20)
+            pose3d.y = randrange(0,20)
+            pose3d.z = randrange(0,20)
+            pose3d.h = randrange(-1,1)
+            pose3d.q0 = uniform(0,1)
+            pose3d.q1 = uniform(0,1-pose3d.q0)
+            pose3d.q2 = uniform(0,1-pose3d.q0-pose3d.q1)
+            pose3d.q3 = uniform(0,1-pose3d.q0-pose3d.q1-pose3d.q2)
+            objpose3d = jderobot.PoseObj3D()
+            objpose3d.id = id_list [id_list.index(i)]
+            objpose3d.pos = pose3d
+            bufferpose3D.append(objpose3d)
+        return bufferpose3D
 
     def clearAll(self, current=None):
         print "Clear All"

@@ -98,6 +98,14 @@ try{
 			getData();
 		}
 
+		function getPose3D(data){
+			var rotateZ=getYaw(data.pos.q0,data.pos.q1,data.pos.q2,data.pos.q3);
+			var rotateY=getPitch(data.pos.q0,data.pos.q1,data.pos.q2,data.pos.q3);
+			var rotateX=getRoll(data.pos.q0,data.pos.q1,data.pos.q2,data.pos.q3);
+			var objpose3d = new obj3DPose(data.id,data.pos.x,data.pos.y,data.pos.z,rotateX,rotateY,rotateZ);
+			return objpose3d;
+		}
+
 		function getData (){
 			w.onmessage = function(event) {
 				if (event.data.func == "drawLine"){
@@ -118,7 +126,9 @@ try{
 				}
 			} else if (event.data.func == "drawObj") {
 				cont += 1
-				addObj(event.data.obj);
+				console.log(event.data.obj);
+				var pos = getPose3D(event.data.obj);
+				addObj(event.data.obj,pos);
 				posInterval = setInterval(function(){
 					setPose3D();
 				}, 5000);
@@ -126,11 +136,7 @@ try{
 			} else if (event.data.func == "pose3d") {
 				for (var i = 0; i < event.data.bpose3d.length; i += 1){
 					data = event.data.bpose3d[i];
-					console.log(data);
-					rotateZ=getYaw(data.pos.q0,data.pos.q1,data.pos.q2,data.pos.q3);
-        	rotateY=getPitch(data.pos.q0,data.pos.q1,data.pos.q2,data.pos.q3);
-        	rotateX=getRoll(data.pos.q0,data.pos.q1,data.pos.q2,data.pos.q3);
-					objpose3d = new obj3DPose(data.id,data.pos.x,data.pos.y,data.pos.z,rotateX,rotateY,rotateZ);
+					var objpose3d = getPose3D(data);
 					moveObj(objpose3d);}
 			}
 			}

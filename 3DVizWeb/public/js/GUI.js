@@ -84,7 +84,7 @@ var toDegrees = 180/Math.PI;
 				}
 			}
 
-			function addObj(obj){
+			function addObj(obj,pos){
 				var type = obj.obj.split(":");
 				if (type[0] == "https" ){
 					var url = obj.obj
@@ -93,27 +93,35 @@ var toDegrees = 180/Math.PI;
 					var url  = window.URL.createObjectURL(file);
 				}
 				if (obj.format == "obj"){
-					loadObj(url, obj)
+					loadObj(url, obj,pos)
 				} else if (obj.format == "dae") {
-					loadDae(url,obj);
+					loadDae(url,obj,pos);
 				}
 			}
 
-			function loadDae (url,obj){
+			function loadDae (url,obj,pose3d){
 				var loader = new THREE.ColladaLoader();
+				var scale = obj.scale;
 				loader.load(url, function (collada) {
-					var avatar = collada.scene;
-					avatar.name = obj.id;
-					scene.add( avatar );
+					var object = collada.scene;
+					object.name = obj.id;
+					object.position.set(pose3d.x,pose3d.y,pose3d.z);
+					object.rotation.set(pose3d.rx*toDegrees,pose3d.ry * toDegrees, pose3d.rz * toDegrees);
+					object.scale.set(scale,scale,scale);
+					scene.add( object );
 				} );
 			}
 
-			function loadObj(url,obj){
+			function loadObj(url,obj,pose3d){
 				var loader = new THREE.OBJLoader();
+				var scale = obj.scale;
 				loader.load(
 					url,
 					function(object){
 						object.name = obj.id;
+						object.position.set(pose3d.x,pose3d.y,pose3d.z);
+						object.rotation.set(pose3d.rx*toDegrees,pose3d.ry * toDegrees, pose3d.rz * toDegrees);
+						object.scale.set(scale,scale,scale);
 						scene.add(object);
 					},
 					function (xhr){

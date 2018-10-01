@@ -118,49 +118,56 @@
         false);
 
         jderobot.object3d = Slice.defineStruct(
-            function(obj, id, format)
+            function(obj, id, format, scale, pos)
             {
                 this.obj = obj !== undefined ? obj : "";
                 this.id = id !== undefined ? id : "";
                 this.format = format !== undefined ? format : "";
+                this.scale = scale !== undefined ? scale : 0.0;
+                this.pos = pos !== undefined ? pos : null;
             },
-            true,
+            false,
             function(__os)
             {
                 __os.writeString(this.obj);
                 __os.writeString(this.id);
                 __os.writeString(this.format);
+                __os.writeFloat(this.scale);
+                __os.writeObject(this.pos);
             },
             function(__is)
             {
+                var self = this;
                 this.obj = __is.readString();
                 this.id = __is.readString();
                 this.format = __is.readString();
+                this.scale = __is.readFloat();
+                __is.readObject(function(__o){ self.pos = __o; }, jderobot.Pose3DData);
             },
-            3,
+            8,
             false);
 
-            jderobot.PoseObj3D = Slice.defineStruct(
-                function(id, pos)
-                {
-                    this.id = id !== undefined ? id : "";
-                    this.pos = pos !== undefined ? pos : null;
-                },
-                false,
-                function(__os)
-                {
-                    __os.writeString(this.id);
-                    __os.writeObject(this.pos);
-                },
-                function(__is)
-                {
-                    var self = this;
-                    this.id = __is.readString();
-                    __is.readObject(function(__o){ self.pos = __o; }, jderobot.Pose3DData);
-                },
-                2,
-                false);
-            Slice.defineSequence(jderobot, "bufferPoseObj3DHelper", "jderobot.PoseObj3D", false);
+        jderobot.PoseObj3D = Slice.defineStruct(
+            function(id, pos)
+            {
+                this.id = id !== undefined ? id : "";
+                this.pos = pos !== undefined ? pos : null;
+            },
+            false,
+            function(__os)
+            {
+                __os.writeString(this.id);
+                __os.writeObject(this.pos);
+            },
+            function(__is)
+            {
+                var self = this;
+                this.id = __is.readString();
+                __is.readObject(function(__o){ self.pos = __o; }, jderobot.Pose3DData);
+            },
+            2,
+            false);
+        Slice.defineSequence(jderobot, "bufferPoseObj3DHelper", "jderobot.PoseObj3D", false);
 
     /**
      * Interface to the Visualization interaction.
