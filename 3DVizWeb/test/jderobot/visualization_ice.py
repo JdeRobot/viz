@@ -193,91 +193,33 @@ if 'bufferPoints' not in _M_jderobot.__dict__:
 if 'object3d' not in _M_jderobot.__dict__:
     _M_jderobot.object3d = Ice.createTempClass()
     class object3d(object):
-        def __init__(self, obj='', id='', format=''):
+        def __init__(self, obj='', id='', format='', scale=0.0, pos=None):
             self.obj = obj
             self.id = id
             self.format = format
+            self.scale = scale
+            self.pos = pos
 
-        def __hash__(self):
-            _h = 0
-            _h = 5 * _h + Ice.getHash(self.obj)
-            _h = 5 * _h + Ice.getHash(self.id)
-            _h = 5 * _h + Ice.getHash(self.format)
-            return _h % 0x7fffffff
-
-        def __compare(self, other):
+        def __eq__(self, other):
             if other is None:
-                return 1
+                return False
             elif not isinstance(other, _M_jderobot.object3d):
                 return NotImplemented
             else:
-                if self.obj is None or other.obj is None:
-                    if self.obj != other.obj:
-                        return (-1 if self.obj is None else 1)
-                else:
-                    if self.obj < other.obj:
-                        return -1
-                    elif self.obj > other.obj:
-                        return 1
-                if self.id is None or other.id is None:
-                    if self.id != other.id:
-                        return (-1 if self.id is None else 1)
-                else:
-                    if self.id < other.id:
-                        return -1
-                    elif self.id > other.id:
-                        return 1
-                if self.format is None or other.format is None:
-                    if self.format != other.format:
-                        return (-1 if self.format is None else 1)
-                else:
-                    if self.format < other.format:
-                        return -1
-                    elif self.format > other.format:
-                        return 1
-                return 0
-
-        def __lt__(self, other):
-            r = self.__compare(other)
-            if r is NotImplemented:
-                return r
-            else:
-                return r < 0
-
-        def __le__(self, other):
-            r = self.__compare(other)
-            if r is NotImplemented:
-                return r
-            else:
-                return r <= 0
-
-        def __gt__(self, other):
-            r = self.__compare(other)
-            if r is NotImplemented:
-                return r
-            else:
-                return r > 0
-
-        def __ge__(self, other):
-            r = self.__compare(other)
-            if r is NotImplemented:
-                return r
-            else:
-                return r >= 0
-
-        def __eq__(self, other):
-            r = self.__compare(other)
-            if r is NotImplemented:
-                return r
-            else:
-                return r == 0
+                if self.obj != other.obj:
+                    return False
+                if self.id != other.id:
+                    return False
+                if self.format != other.format:
+                    return False
+                if self.scale != other.scale:
+                    return False
+                if self.pos != other.pos:
+                    return False
+                return True
 
         def __ne__(self, other):
-            r = self.__compare(other)
-            if r is NotImplemented:
-                return r
-            else:
-                return r != 0
+            return not self.__eq__(other)
 
         def __str__(self):
             return IcePy.stringify(self, _M_jderobot._t_object3d)
@@ -287,7 +229,9 @@ if 'object3d' not in _M_jderobot.__dict__:
     _M_jderobot._t_object3d = IcePy.defineStruct('::jderobot::object3d', object3d, (), (
         ('obj', (), IcePy._t_string),
         ('id', (), IcePy._t_string),
-        ('format', (), IcePy._t_string)
+        ('format', (), IcePy._t_string),
+        ('scale', (), IcePy._t_float),
+        ('pos', (), _M_jderobot._t_Pose3DData)
     ))
 
     _M_jderobot.object3d = object3d
