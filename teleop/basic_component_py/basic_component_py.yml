@@ -11,7 +11,7 @@ basic_component:
     Server: Glacier # Deactivate, Ice , Ros, Glacier
     Proxy: "CameraL:default -h localhost  -p 9001"
     Format: RGB8
-    Topic: ""/turtlebotROS/cameraL/image_raw""
+    Topic: "/turtlebotROS/cameraL/image_raw"
     Name: basic_component_pyCamera
     Fps: 30
     MessageType: "CompressedImage"
