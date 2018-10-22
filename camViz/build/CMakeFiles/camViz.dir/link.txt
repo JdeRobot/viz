@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/camViz.dir/camViz.cpp.o CMakeFiles/camViz.dir/viewer.cpp.o  -o camViz -rdynamic -lcolorspacesmm -lJderobotInterfaces -ljderobotutil 
