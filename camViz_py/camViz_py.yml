@@ -1,0 +1,12 @@
+basic_component:
+  Camera:
+    Server: Ros # Deactivate, Ice , Ros
+    Proxy: "cameraA:default -h 0.0.0.0 -p 9999"
+    Format: RGB8
+    Topic: "/usb_cam/image_raw/compressed"
+    Name: basic_component_pyCamera
+    Fps: 30
+    MessageType: "CompressedImage" # Image or CompressedImage
+
+  NodeName: camViz_py
+  Endpoints: ws -h localhost -p 9090
