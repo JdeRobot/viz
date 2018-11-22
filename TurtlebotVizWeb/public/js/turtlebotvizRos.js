@@ -66,7 +66,7 @@ function TurtlebotVizRos (config){
   var pose3d;
   var laser;
   var timeout = 10000;
-  var motorsInterval = null;
+  var motorsInterval = 10;
   var lastV=0, lastW=0;
 
   var self=this;
