@@ -2,7 +2,7 @@ carViz:
   Motors:
     Server: 1 # 0 -> Deactivate, 1 -> ROS2 , 2 -> ROS
     Proxy: "Motors:default -h localhost -p 9999"
-    Topic: "/mobile_base/commands/velocity"
+    Topic: "/cmd_vel"
     Name: carVizMotors
     maxV: 3
     maxW: 0.7

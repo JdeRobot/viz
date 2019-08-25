@@ -6,7 +6,7 @@
 #include "sensors.h"
 #include "actuators.h"
 
-#include "jderobot/comm/communicator.hpp"
+#include "../comm/communicator.hpp"
 
 #include <stdio.h>
 
@@ -22,7 +22,7 @@ public:
     Actuators* getActuators();
     Sensors* getSensors();
 
-private:
+//private:
     pthread_mutex_t mutex;
 
     Sensors* sensors;
