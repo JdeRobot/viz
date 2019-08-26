@@ -23,11 +23,11 @@
 #define CAMVIZ_VIEWER_H
 
 #include <gtkmm.h>
-#include <libglademm.h>
-#include <IceUtil/Thread.h>
-#include <IceUtil/Time.h>
+
+//#include <libglademm.h>
+
 #include <string>
-#include <visionlib/colorspaces/colorspacesmm.h>
+#include </opt/jderobot/include/jderobot/visionlib/colorspaces/colorspacesmm.h>
 
 namespace camViz{
 
@@ -44,7 +44,8 @@ namespace camViz{
     void displayFrameRate(int rate);
 
   private:
-    Glib::RefPtr<Gnome::Glade::Xml> refXml;
+    //Glib::RefPtr<Gnome::Glade::Xml> refXml;
+
     Gtk::Image* gtkimage;
     Gtk::Window* mainwindow;
     Gtk::Label* fpslabel;
@@ -54,7 +55,8 @@ namespace camViz{
 
       
     //! time variables for calculating number of frames per second 
-    IceUtil::Time currentFrameTime,oldFrameTime;
+    //IceUtil::Time currentFrameTime,oldFrameTime;
+    //http://wiki.ros.org/roscpp/Overview/Time
     double fps;
     int frameCount;
   };

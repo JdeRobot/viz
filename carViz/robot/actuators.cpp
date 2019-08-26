@@ -3,12 +3,9 @@
 Actuators::Actuators(Comm::Communicator* jdrc)
 {
     this->jdrc = jdrc;
-
     this->motorsClient = Comm::getMotorsClient(jdrc, "carViz.Motors");
 
 }
-
-
 
 ///////////////// GETTER //////////////////
 float Actuators::getMotorV()

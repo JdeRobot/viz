@@ -5,7 +5,7 @@
 #include <iostream>
 #include <math.h>
 #include <QtWidgets>
-#include <jderobot/types/laserData.h>
+#include </opt/jderobot/include/jderobot/types/laserData.h>
 
 class LaserWidget: public QWidget
 {

@@ -23,23 +23,37 @@
 #include <iostream>
 #include <cmath>
 #include <string>
-#include <resourcelocator/gladelocator.hpp> 
 
 namespace camViz {
-  const std::string gladepath = resourcelocator::findGladeFile("camViz.glade");
 
   Viewer::Viewer()
     : gtkmain(0, 0), frameCount(0) {
 
     std::cout << "Loading glade\n";
-    refXml = Gnome::Glade::Xml::create(gladepath);
-    refXml->get_widget("image", gtkimage);
-    refXml->get_widget("mainwindow",mainwindow);
-    refXml->get_widget("fpslabel",fpslabel);
-        
-    // start the timer for calculating the number of frames per second
-    // the images are being displayed at
-    oldFrameTime = IceUtil::Time::now();
+
+  Glib::RefPtr<Gtk::Builder> builder= Gtk::Builder::create();
+
+
+try
+  {
+    builder->add_from_file("camViz.glade");
+  }
+  catch(const Glib::FileError& ex)
+  {
+    std::cerr << "FileError: " << ex.what() << std::endl;
+    //return 1;
+  }
+  catch(const Gtk::BuilderError& ex)
+  {
+    std::cerr << "BuilderError: " << ex.what() << std::endl;
+    //return 1;
+  }
+
+    builder->get_widget("image", gtkimage);
+
+    builder->get_widget("mainwindow",mainwindow);
+    builder->get_widget("fpslabel",fpslabel);
+
   }
     
 
@@ -50,14 +64,14 @@ namespace camViz {
   }
 
 
+
   void Viewer::display(cv::Mat imageRGB)
   {
 
 	  if (!imageRGB.empty()){
 
-
 		  Glib::RefPtr<Gdk::Pixbuf> imgBuff =
-				  Gdk::Pixbuf::create_from_data((const guint8*) imageRGB.data,Gdk::COLORSPACE_RGB,false,8,imageRGB.cols,imageRGB.rows,imageRGB.step);
+			Gdk::Pixbuf::create_from_data((const guint8*) imageRGB.data,Gdk::COLORSPACE_RGB,false,8,imageRGB.cols,imageRGB.rows,imageRGB.step);
 
 		  gtkimage->clear();
 		  gtkimage->set(imgBuff);
@@ -67,25 +81,6 @@ namespace camViz {
 	  while (gtkmain.events_pending())
 		  gtkmain.iteration();
 
-	  /*
-    colorspaces::ImageRGB8 img_rgb8(image);//conversion will happen if needed
-    Glib::RefPtr<Gdk::Pixbuf> imgBuff = 
-      Gdk::Pixbuf::create_from_data((const guint8*)img_rgb8.data,
-				    Gdk::COLORSPACE_RGB,
-				    false,
-				    8,
-				    img_rgb8.width,
-				    img_rgb8.height,
-				    img_rgb8.step);
-    
-    gtkimage->clear();
-    gtkimage->set(imgBuff);
-    displayFrameRate();
-    mainwindow->resize(1,1);
-    while (gtkmain.events_pending())
-      gtkmain.iteration();
-
-      */
   }
     
   void
@@ -96,4 +91,5 @@ namespace camViz {
       fpslabel->set_label(fpsString.str());
   }
 
-}//namespace
+
+}

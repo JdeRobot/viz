@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 
-#include <jderobot/config/properties.hpp>
+#include "../../config/properties.hpp"
 
 class controlVW : public QWidget
 {
@@ -16,8 +16,8 @@ public:
     
     void Stop();
     void setProps(Config::Properties props);
-	float getV();
-	float getW();
+	    float getV();
+	    float getW();
 
 private:
     QPointF line;

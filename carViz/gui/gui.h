@@ -5,7 +5,7 @@
 
 #include "../robot/robot.h"
 
-#include <jderobot/config/properties.hpp>
+//#include </opt/jderobot/include/jderobot/config/properties.hpp>
 
 #include "widget/controlvw.h"
 #include "widget/cameraswidget.h"
