@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
 <!--*- mode: xml -*-->
-<interface>
-  <object class="GtkWindow" id="mainwindow">
+<glade-interface>
+  <widget class="GtkWindow" id="mainwindow">
     <property name="visible">True</property>
     <property name="title" translatable="yes">CamViz</property>
     <child>
-      <object class="GtkTable" id="table1">
+      <widget class="GtkTable" id="table1">
         <property name="visible">True</property>
         <property name="n_rows">2</property>
         <property name="n_columns">1</property>
         <child>
-          <object class="GtkLabel" id="fpslabel">
+          <widget class="GtkLabel" id="fpslabel">
             <property name="visible">True</property>
             <property name="xalign">0</property>
             <property name="label" translatable="yes">0 fps</property>
-          </object>
+          </widget>
           <packing>
             <property name="top_attach">1</property>
             <property name="bottom_attach">2</property>
@@ -24,17 +24,17 @@
           </packing>
         </child>
         <child>
-          <object class="GtkImage" id="image">
+          <widget class="GtkImage" id="image">
             <property name="visible">True</property>
             <property name="xalign">0.68999999761581421</property>
             <property name="stock">gtk-missing-image</property>
-          </object>
+          </widget>
           <packing>
             <property name="x_options">GTK_FILL</property>
             <property name="y_options">GTK_FILL</property>
           </packing>
         </child>
-      </object>
+      </widget>
     </child>
-  </object>
-</interface>
+  </widget>
+</glade-interface>

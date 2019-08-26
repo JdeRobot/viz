@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>TurtlebotViz</title>
+   <meta name="description" content="">
+
+   <!-- core CSS -->
+   <link href="css/bootstrap.min.css" rel="stylesheet">
+   <link href="css/bootstrap-toggle.min.css" rel="stylesheet">
+   <link href="css/turtlebotviewer.css" rel="stylesheet">
+</head>
+<!--/head-->
+
+
+<body>
+<header id="header">
+  <nav class="navbar navbar-inverse" role="banner">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#"><i class="fa fa-bolt"></i> JdeRobot App TurtlebotViz</a> </div>
+    </div>
+    <!--/.container-->
+  </nav>
+  <!--/nav-->
+
+</header>
+<!--/header-->
+<div id="body" class="container">
+   <div class="row">
+      <div id="buttons" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p>
+           <button id="start" type="button" class="btn btn-md btn-success">Start</button>
+           <button id="stop" type="button" class="btn btn-md btn-danger">Stop</button>
+           <button id="config" type="button" class="btn btn-info" data-toggle="modal" data-target="#configure">Config</button>
+        </p>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+         <div class="border-carbon panel panel-info">
+            <div class=" letrero panel-heading hidden-sm hidden-xs">
+               <span class="panel-title">Camera Left</span>
+            </div>
+            <div class="panel-body padding0 border-blue container-fluid">
+               <canvas id="camView" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cam">Your browser does not support the HTML5 canvas tag.</canvas>
+            </div>
+         </div>
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+         <div class="border-carbon panel panel-info">
+            <div class=" letrero panel-heading hidden-sm hidden-xs">
+               <span class="panel-title">Camera Right</span>
+            </div>
+            <div class="panel-body padding0 border-blue container-fluid">
+               <canvas id="camView2" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cam">Your browser does not support the HTML5 canvas tag.</canvas>
+            </div>
+         </div>
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+         <div class="border-carbon panel panel-info">
+            <div class=" letrero panel-heading hidden-sm hidden-xs">
+               <span class="panel-title">Laser</span>
+            </div>
+            <div class="panel-body padding0 border-blue container-fluid">
+               <canvas id="laser" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">Your browser does not support the HTML5 canvas tag.</canvas>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+         <div class="border-carbon panel panel-info">
+            <div class=" letrero panel-heading">
+               <span class="panel-title">3D Model</span>   <input id="mod-toggle" disabled type="checkbox" data-toggle="toggle" data-onstyle="info" data-size="mini" data-offstyle="info">
+            </div>
+            <div class="panel-body padding0 border-blue container-fluid">
+               <canvas id="model" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">Your browser does not support the HTML5 canvas tag.</canvas>
+            </div>
+         </div>
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+         <div class="border-carbon panel panel-info">
+            <div class=" letrero panel-heading hidden-sm hidden-xs">
+               <span class="panel-title">Control</span>
+            </div>
+            <div class="panel-body padding0 border-blue container-fluid">
+               <canvas id="control" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">Your browser does not support the HTML5 canvas tag.</canvas>
+            </div>
+         </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
+         <button id="stopR" type="button" class="btn btn-info" >Stop Bot</button>
+      </div>
+   </div>
+</div>
+
+<div class="modal fade" id="configure" tabindex="-1" role="dialog" aria-labelledby="configLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="configLabel">TurtlebotViewer Config</h4>
+      </div>
+      <div class="modal-body">
+         <label class="" for="globaladdr">Same Address</label>
+         <form class="form-inline">
+            <div class="form-group">
+               <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">Addr</span>
+                  <input  id="globaladdr" type="text" class="form-control" placeholder="Address" value="localhost" aria-describedby="basic-addon1">
+               </div>
+            </div>
+            <!--<input id="sa-toggle" type="checkbox" data-toggle="toggle" data-onstyle="info" data-offstyle="info">-->
+            <button id="sa-button" type="button" class="btn btn-info">Put</button>
+         </form>
+         <br>
+         <label class="" for="DfIce">Default EndPoints and Ports</label>
+         <form class="form-inline">
+            <button id="DfIce" type="button" class="btn btn-info">Ice</button>
+            <button id="DfRos" type="button" class="btn btn-info">Ros</button>
+            <input id="serverType" type="hidden" value = "Ice">
+         </form>
+         <br>
+         <form>
+            <div class="form-group">
+               <label for="dircam1">Camera Left</label>
+               <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">Addr</span>
+                  <input  id="dircam1" type="text" class="form-control in-addr" placeholder="Address" value="localhost" aria-describedby="basic-addon1">
+               </div>
+               <div class="input-group">
+                  <label class="sr-only" for="portcam1">Camera Port</label>
+                  <span class="input-group-addon" id="basic-addon1">Port</span>
+                  <input  id="portcam1" type="number" class="form-control" value="11010" aria-describedby="basic-addon1">
+               </div>
+               <div class="input-group">
+                  <label class="sr-only" for="epcam1">Camera EP</label>
+                  <span class="input-group-addon" id="epcaml">EndPoint</span>
+                  <input id="epcam1" type="text" class="form-control" value="CameraL" aria-describedby="basic-addon1">
+               </div>
+            </div>
+            <div class="form-group">
+               <label for="dircam2">Camera Right</label>
+               <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">Addr</span>
+                  <input  id="dircam2" type="text" class="form-control in-addr" placeholder="Address" value="localhost" aria-describedby="basic-addon1">
+               </div>
+               <div class="input-group">
+                  <label class="sr-only" for="portcam2">Camera Port</label>
+                  <span class="input-group-addon" id="basic-addon1">Port</span>
+                  <input  id="portcam2" type="number" class="form-control" value="11010" aria-describedby="basic-addon1">
+               </div>
+               <div class="input-group">
+                  <label class="sr-only" for="epcam2">Camera EP</label>
+                  <span class="input-group-addon" id="epcamr">EndPoint</span>
+                  <input id="epcam2" type="text" class="form-control" value="CameraR" aria-describedby="basic-addon1">
+               </div>
+            </div>
+            <div class="form-group">
+               <label for="dirmotors">Motors</label>
+               <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">Addr</span>
+                  <input  id="dirmotors" type="text" class="form-control in-addr" placeholder="Address" value="localhost" aria-describedby="basic-addon1">
+               </div>
+               <div class="input-group">
+                  <label class="sr-only" for="portmotors">Port</label>
+                  <span class="input-group-addon" id="basic-addon1">Port</span>
+                  <input  id="portmotors" type="number" class="form-control" value="11010" aria-describedby="basic-addon1">
+               </div>
+               <div class="input-group">
+                  <label class="sr-only" for="epmotors">EP</label>
+                  <span class="input-group-addon" id = "epmotors1">EndPoint</span>
+                  <input id="epmotors" type="text" class="form-control" value="Motors" aria-describedby="basic-addon1">
+               </div>
+               <div class="row">
+                  <div class="col-lg-6 padding-right0">
+                    <div class="input-group">
+                      <span class="input-group-addon">MaxV</span>
+                      <input id="maxv" type="text" class="form-control" value="3">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 padding-left0">
+                    <div class="input-group">
+                      <span class="input-group-addon">MaxW</span>
+                      <input id="maxw" type="text" class="form-control" value="0.7">
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group">
+               <label for="dirpose3d">Pose3D</label>
+               <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">Addr</span>
+                  <input  id="dirpose3d" type="text" class="form-control in-addr" placeholder="Address" value="localhost" aria-describedby="basic-addon1">
+               </div>
+               <div class="input-group">
+                  <label class="sr-only" for="portpose3d">Port</label>
+                  <span class="input-group-addon" id="basic-addon1">Port</span>
+                  <input  id="portpose3d" type="number" class="form-control" value="11010" aria-describedby="basic-addon1">
+               </div>
+               <div class="input-group">
+                  <label class="sr-only" for="eppose3d">EP</label>
+                  <span class="input-group-addon" id="eppose3d1">EndPoint</span>
+                  <input id="eppose3d" type="text" class="form-control" value="Pose3D" aria-describedby="basic-addon1">
+               </div>
+            </div>
+            <div class="form-group">
+               <label for="dirlaser">Laser</label>
+               <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">Addr</span>
+                  <input  id="dirlaser" type="text" class="form-control in-addr" placeholder="Address" value="localhost" aria-describedby="basic-addon1">
+               </div>
+               <div class="input-group">
+                  <label class="sr-only" for="portlaser">Port</label>
+                  <span class="input-group-addon" id="basic-addon1">Port</span>
+                  <input  id="portlaser" type="number" class="form-control" value="11010" aria-describedby="basic-addon1">
+               </div>
+               <div class="input-group">
+                  <label class="sr-only" for="eplaser">EP</label>
+                  <span class="input-group-addon" id="eplaser1">EndPoint</span>
+                  <input id="eplaser" type="text" class="form-control" value="Laser" aria-describedby="basic-addon1">
+               </div>
+            </div>
+         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+        <button id="save" type="button" class="btn btn-success" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <script>
+    try{
+      window.$ = window.jQuery = require('jquery');
+    }catch (e){}
+  </script>
+   <script src="js/jquery.min.js"></script>
+   <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+   <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+   <script src="js/bootstrap-toggle.min.js"></script>
+   <script src="js/three.min.js"></script>
+   <script src="js/JoyStickControls.js"></script>
+   <script src="js/TrackballControls.js"></script>
+   <script src="js/ColladaLoader.js"></script>
+   <script src="js/gui.js"></script>
+   <script src="js/turtlebotvizRos.js"></script>
+   <script src="js/apiRos.js"></script>
+   <script src="js/apiIce.js"></script>
+   <script src="js/turtlebotviewerIce.js"></script>
+   <script src="js/turtlebotviewerWeb.js"></script>
+</body>
+</html>

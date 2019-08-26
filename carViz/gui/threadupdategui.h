@@ -9,7 +9,7 @@
 #include <iostream>
 #include <sys/time.h>
 
-//#include <jderobot/config/properties.hpp>
+#include <jderobot/config/properties.hpp>
 
 #define cycle_update_gui 50 //miliseconds
 

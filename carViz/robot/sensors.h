@@ -1,21 +1,22 @@
-#pragma once
-//#include <Ice/Ice.h>
-//#include <IceUtil/IceUtil.h>
+#ifndef SENSORS_H
+#define SENSORS_H
 
-#include </opt/jderobot/include/jderobot/types/laserData.h>
-#include </opt/jderobot/include/jderobot/types/image.h>
-#include </opt/jderobot/include/jderobot/types/pose3d.h>
+#include <Ice/Ice.h>
+#include <IceUtil/IceUtil.h>
+
+#include <jderobot/types/laserData.h>
+#include <jderobot/types/image.h>
+#include <jderobot/types/pose3d.h>
 
 //Opencv
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
-#include "../comm/communicator.hpp"
-#include "../comm/laserClient.hpp"
-#include "../comm/cameraClient.hpp"
-#include "../comm/pose3dClient.hpp"
-
+#include "jderobot/comm/communicator.hpp"
+#include <jderobot/comm/laserClient.hpp>
+#include <jderobot/comm/cameraClient.hpp>
+#include <jderobot/comm/pose3dClient.hpp>
 
 class Sensors
 {
@@ -29,7 +30,7 @@ public:
     JdeRobotTypes::Image getImage2();
 
 
-//private:
+private:
 
     Comm::Communicator* jdrc;
 
@@ -41,4 +42,9 @@ public:
 
     Comm::Pose3dClient* poseClient;
 
+
+
+
 };
+
+#endif // SENSORS_H

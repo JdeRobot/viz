@@ -1,10 +1,14 @@
-#pragma once
+#ifndef ACTUATORS_H
+#define ACTUATORS_H
 
 #include <QMutex>
 
-#include </opt/jderobot/include/jderobot/types/cmdvel.h>
+#include <Ice/Ice.h>
+#include <IceUtil/IceUtil.h>
 
-#include "../comm/motorsClient.hpp"
+#include <jderobot/types/cmdvel.h>
+#include "jderobot/comm/communicator.hpp"
+#include <jderobot/comm/motorsClient.hpp>
 
 class Actuators
 {
@@ -21,7 +25,7 @@ public:
     void setMotorL(float motorL);
     void setMotorSTOP();
 
-//private:
+private:
 
     QMutex mutex;
 
@@ -31,3 +35,4 @@ public:
     Comm::MotorsClient* motorsClient;
 
 };
+#endif // ACTUATORS_H

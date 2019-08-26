@@ -1,0 +1,28 @@
+server: Ros #Ice or Ros
+camrightserv:
+  dir: "localhost"
+  port: "9090"
+camrightepname: "CameraR"
+camrighttopic: "/TurtlebotROS/cameraR/image_raw/compressed"
+camleftserv:
+  dir: "localhost"
+  port: "9090"
+camleftepname: "CameraL"
+camlefttopic: "/TurtlebotROS/cameraL/image_raw/compressed"
+motorserv:
+  dir: "localhost"
+  port: "9090"
+motorsepname: "Motors"
+motorstopic: "/turtlebotROS/mobile_base/commands/velocity"
+pose3dserv:
+  dir: "localhost"
+  port: "9090"
+pose3depname: "Pose3D"
+pose3dtopic: "/turtlebotROS/odom"
+laserserv:
+  dir: "localhost"
+  port: "9090"
+laserepname: "Laser"
+lasertopic: "/turtlebotROS/laser/scan"
+maxv: 3
+maxw: 0.7
